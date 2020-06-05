@@ -67,7 +67,7 @@ public class ProviderDaoImpl extends BaseDao implements ProviderDao {
         ps.setString(3, provider.getTel());
         ps.setString(4, provider.getAddress());
         ps.setString(5, provider.getCreator());
-        ps.setDate(6, (Date) provider.getCreate_time());
+        ps.setDate(6, new Date(provider.getCreate_time().getTime()));
 
         return ps.executeUpdate();
     }
