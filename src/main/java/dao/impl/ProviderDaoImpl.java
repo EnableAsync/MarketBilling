@@ -38,6 +38,7 @@ public class ProviderDaoImpl extends BaseDao implements ProviderDao {
             Provider provider = Provider.builder()
                     .id(rs.getInt("id"))
                     .name(rs.getString("name"))
+                    .desc(rs.getString("desc"))
                     .tel(rs.getString("tel"))
                     .address(rs.getString("address"))
                     .creator(rs.getString("creator"))
@@ -82,8 +83,31 @@ public class ProviderDaoImpl extends BaseDao implements ProviderDao {
         ps.setString(3, provider.getTel());
         ps.setString(4, provider.getAddress());
         ps.setString(5, provider.getCreator());
-        ps.setDate(6, (Date) provider.getCreate_time());
+        ps.setDate(6, new Date(provider.getCreate_time().getTime()));
         ps.setInt(7, provider.getId());
         return ps.executeUpdate();
+    }
+
+    @Override
+    public Provider getProviderById(int id) throws SQLException, ClassNotFoundException {
+        Connection conn = getConn();
+        String sql = "select * from market_billing.providers where id = ?";
+        PreparedStatement ps = conn.prepareStatement(sql);
+        ps.setInt(1, id);
+        ResultSet rs = ps.executeQuery();
+        Provider provider = null;
+
+        if (rs.next()) {
+            provider = Provider.builder()
+                    .id(rs.getInt("id"))
+                    .name(rs.getString("name"))
+                    .desc("desc")
+                    .tel(rs.getString("tel"))
+                    .address(rs.getString("address"))
+                    .creator(rs.getString("creator"))
+                    .create_time(rs.getDate("create_time"))
+                    .build();
+        }
+        return provider;
     }
 }

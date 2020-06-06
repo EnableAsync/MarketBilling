@@ -37,6 +37,7 @@
         </div>
 
         <div class="buttons">
+            <input name="method" type="hidden" value="post" />
             <input name="button" value="提交" class="input-button" type="submit">
             <input name="button" onclick="window.location='provider_list.jsp';" value="返回" class="input-button"
                    type="button">

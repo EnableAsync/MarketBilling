@@ -3,13 +3,13 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
          version="4.0">
-<!--    <welcome-file-list>-->
-<!--        <welcome-file>login.jsp</welcome-file>-->
-<!--    </welcome-file-list>-->
+    <!--    <welcome-file-list>-->
+    <!--        <welcome-file>login.jsp</welcome-file>-->
+    <!--    </welcome-file-list>-->
 
     <servlet>
         <servlet-name>Login</servlet-name>
-        <servlet-class>ctrl.login.Login</servlet-class>
+        <servlet-class>ctrl.user.Login</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>Login</servlet-name>
@@ -33,6 +33,33 @@
     <servlet-mapping>
         <servlet-name>Provider</servlet-name>
         <url-pattern>/provider</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>ProviderModify</servlet-name>
+        <servlet-class>ctrl.provider.Modify</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ProviderModify</servlet-name>
+        <url-pattern>/provider_modify</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>ProviderDelete</servlet-name>
+        <servlet-class>ctrl.provider.Delete</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ProviderDelete</servlet-name>
+        <url-pattern>/provider_delete</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>Logout</servlet-name>
+        <servlet-class>ctrl.user.Logout</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Logout</servlet-name>
+        <url-pattern>/logout</url-pattern>
     </servlet-mapping>
 
 </web-app>

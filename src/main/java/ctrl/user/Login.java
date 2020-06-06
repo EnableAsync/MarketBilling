@@ -1,4 +1,4 @@
-package ctrl.login;
+package ctrl.user;
 
 import dao.UserDao;
 import dao.impl.UserDaoImpl;
@@ -9,7 +9,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.sql.SQLException;
 
 public class Login extends HttpServlet {

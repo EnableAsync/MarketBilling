@@ -2,18 +2,18 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-<title>Insert title here</title>
-<link type="text/css" rel="stylesheet" href="css/style.css">
-<script type="text/javascript">
-    function doit(flag, id) {
-        if (flag === "del") {
-            if (confirm("确认删除吗？") !== true)
-                return;
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>Insert title here</title>
+    <link type="text/css" rel="stylesheet" href="css/style.css">
+    <script type="text/javascript">
+        function doit(flag, id) {
+            if (flag === "del") {
+                if (confirm("确认删除吗？") !== true)
+                    return;
+            }
+            window.location = "provider.do?id=" + id + "&flag=" + flag;
         }
-        window.location = "provider.do?id=" + id + "&flag=" + flag;
-    }
-</script>
+    </script>
 </head>
 <body>
 <%--<div class="menu">--%>
@@ -67,30 +67,31 @@
                 </td>
             </tr>
             <c:forEach items="${sessionScope.providers}" var="provider">
-            <tr>
-                <td width="70" height="29">
-                    <div class="STYLE1" align="center">${provider.id}</div>
-                </td>
-                <td width="80">
-                    <div class="STYLE1" align="center">${provider.name}</div>
-                </td>
-                <td width="100">
-                    <div class="STYLE1" align="center">${provider.desc}</div>
-                </td>
-                <td width="100">
-                    <div class="STYLE1" align="center">${provider.creator}</div>
-                </td>
+                <tr>
+                    <td width="70" height="29">
+                        <div class="STYLE1" align="center">${provider.id}</div>
+                    </td>
+                    <td width="80">
+                        <div class="STYLE1" align="center">${provider.name}</div>
+                    </td>
+                    <td width="100">
+                        <div class="STYLE1" align="center">${provider.desc}</div>
+                    </td>
+                    <td width="100">
+                        <div class="STYLE1" align="center">${provider.creator}</div>
+                    </td>
 
-                <td width="100">
-                    <div class="STYLE1" align="center">${provider.tel}</div>
-                </td>
-                <td width="100">
-                    <div class="STYLE1" align="center">${provider.address}</div>
-                </td>
-                <td width="100">
-                    <div class="STYLE1" align="center"><a href="#">修改</a></div>
-                </td>
-            </tr>
+                    <td width="100">
+                        <div class="STYLE1" align="center">${provider.tel}</div>
+                    </td>
+                    <td width="100">
+                        <div class="STYLE1" align="center">${provider.address}</div>
+                    </td>
+                    <td width="100">
+                        <div class="STYLE1" align="center"><a href="provider_modify?id=${provider.id}">修改</a></div>
+                        <span class="STYLE1" align="center"><a href="provider_delete?id=${provider.id}">删除</a></span>
+                    </td>
+                </tr>
             </c:forEach>
 
             </tbody>

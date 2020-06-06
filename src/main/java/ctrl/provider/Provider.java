@@ -37,20 +37,14 @@ public class Provider extends HttpServlet {
                             .create_time(time)
                             .build()
             );
+//            for (entity.Provider p :
+//                    providerDao.getAllproviders()) {
+//                System.out.println(p);
+//            }
             req.getSession().setAttribute("providers", providerDao.getAllproviders());
             resp.sendRedirect("provider_list.jsp");
         } catch (SQLException | ClassNotFoundException e) {
             e.printStackTrace();
         }
-    }
-
-    @Override
-    protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        super.doPut(req, resp);
-    }
-
-    @Override
-    protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        super.doDelete(req, resp);
     }
 }

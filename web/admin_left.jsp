@@ -14,10 +14,15 @@
 </head>
 <body class="frame-bd">
 <ul class="left-menu">
-    <li><a href="admin_bill_list.jsp" target="mainFrame"><img src="images/btn_bill.gif" /></a></li>
+    <li><a href="bill_list.jsp" target="mainFrame"><img src="images/btn_bill.gif" /></a></li>
     <li><a href="provider_list.jsp" target="mainFrame"><img src="images/btn_suppliers.gif" /></a></li>
     <li><a href="user_list.jsp" target="mainFrame"><img src="images/btn_users.gif" /></a></li>
-    <li><a href="#" onClick="javaScript:alert('这里实现退出操作！')"><img src="images/btn_exit.gif" /></a></li>
+    <li><a href="#" onclick="logout()"><img src="images/btn_exit.gif" /></a></li>
 </ul>
 </body>
+<script>
+    function logout(){
+        top.location.href="./logout";
+    }
+</script>
 </html>
