@@ -2,6 +2,7 @@ package ctrl.provider;
 
 import dao.ProviderDao;
 import dao.impl.ProviderDaoImpl;
+import entity.Provider;
 import entity.User;
 
 import javax.servlet.ServletException;
@@ -12,8 +13,11 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.Date;
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
-public class Provider extends HttpServlet {
+public class Add extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         req.setCharacterEncoding("utf-8");
@@ -45,11 +49,12 @@ public class Provider extends HttpServlet {
                             .create_time(time)
                             .build()
             );
-//            for (entity.Provider p :
-//                    providerDao.getAllproviders()) {
-//                System.out.println(p);
-//            }
-            req.getSession().setAttribute("providers", providerDao.getAllproviders());
+            List<Provider> providerList = providerDao.getAllproviders();
+            Map<Integer, String> providerMap =
+                    providerList.stream().collect(Collectors.toMap(Provider::getId, Provider::getName));
+
+            session.setAttribute("providers", providerList);
+            session.setAttribute("providersMap", providerMap);
             resp.sendRedirect("provider_list.jsp");
         } catch (SQLException | ClassNotFoundException e) {
             e.printStackTrace();

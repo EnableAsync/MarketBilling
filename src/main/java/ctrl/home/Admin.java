@@ -6,6 +6,7 @@ import dao.UserDao;
 import dao.impl.BillDaoImpl;
 import dao.impl.ProviderDaoImpl;
 import dao.impl.UserDaoImpl;
+import entity.Provider;
 import entity.User;
 
 import javax.servlet.ServletException;
@@ -15,6 +16,9 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 public class Admin extends HttpServlet {
     @Override
@@ -38,7 +42,13 @@ public class Admin extends HttpServlet {
         try {
             session.setAttribute("users", userDao.getAllUsers());
             session.setAttribute("bills", billDao.getAllBills());
-            session.setAttribute("providers", providerDao.getAllproviders());
+
+            List<Provider> providerList = providerDao.getAllproviders();
+            Map<Integer, String> providerMap =
+                    providerList.stream().collect(Collectors.toMap(Provider::getId, Provider::getName));
+
+            session.setAttribute("providers", providerList);
+            session.setAttribute("providersMap", providerMap);
         } catch (SQLException | ClassNotFoundException e) {
             e.printStackTrace();
         }

@@ -27,7 +27,8 @@
 <%--</div>--%>
 <div class="main">
     <div class="optitle clearfix">
-        <%--        <em><input type="button" name="button" value="添加数据" class="input-button" onclick="location.href='modify.html'" /></em>--%>
+        <em><input type="button" name="button" value="添加数据" class="input-button"
+                   onclick="location.href='bill_add.jsp'"/></em>
         <div class="title">账单管理&gt;&gt;</div>
     </div>
     <div class="content">
@@ -41,6 +42,7 @@
                 <td>供应商名称</td>
                 <td>商品描述</td>
                 <td>账单时间</td>
+                <td>操作</td>
             </tr>
             <c:forEach items="${sessionScope.bills}" var="bill">
                 <tr>
@@ -48,10 +50,19 @@
                     <td>${bill.product_name}</td>
                     <td>${bill.product_count}</td>
                     <td>${bill.total_price}</td>
-                    <td>${bill.is_payment}</td>
-                    <td>${bill.product_name}</td>
+                    <td>
+                        <c:choose>
+                            <c:when test="${bill.is_payment == 1}">已支付</c:when>
+                            <c:otherwise>未支付</c:otherwise>
+                        </c:choose>
+                    </td>
+                    <td>${sessionScope.providersMap[bill.provider_id]}</td>
                     <td>${bill.product_desc}</td>
                     <td>${bill.create_time}</td>
+                    <td>
+                        <div class="STYLE1"><a href="billing_modify?id=${bill.id}">修改</a></div>
+                        <span class="STYLE1"><a href="billing_delete?id=${bill.id}">删除</a></span>
+                    </td>
                 </tr>
             </c:forEach>
         </table>

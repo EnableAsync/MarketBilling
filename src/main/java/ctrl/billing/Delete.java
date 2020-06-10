@@ -1,6 +1,8 @@
-package ctrl.provider;
+package ctrl.billing;
 
+import dao.BillDao;
 import dao.ProviderDao;
+import dao.impl.BillDaoImpl;
 import dao.impl.ProviderDaoImpl;
 import entity.Provider;
 
@@ -16,7 +18,6 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 public class Delete extends HttpServlet {
-    @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         req.setCharacterEncoding("utf-8");
         resp.setContentType("text/html; charset=utf-8");
@@ -29,23 +30,14 @@ public class Delete extends HttpServlet {
         }
 
         int id = Integer.parseInt(req.getParameter("id"));
-        ProviderDao providerDao = new ProviderDaoImpl();
+        BillDao billDao = new BillDaoImpl();
         try {
-            providerDao.delProvider(id);
-            List<Provider> providerList = providerDao.getAllproviders();
-            Map<Integer, String> providerMap =
-                    providerList.stream().collect(Collectors.toMap(Provider::getId, Provider::getName));
+            billDao.delBill(id);
 
-            session.setAttribute("providers", providerList);
-            session.setAttribute("providersMap", providerMap);
-            resp.sendRedirect("provider_list.jsp");
+            req.getSession().setAttribute("bills", billDao.getAllBills());
+            resp.sendRedirect("bill_list.jsp");
         } catch (SQLException | ClassNotFoundException e) {
             e.printStackTrace();
         }
-    }
-
-    @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        doGet(req, resp);
     }
 }

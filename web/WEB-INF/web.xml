@@ -28,7 +28,7 @@
 
     <servlet>
         <servlet-name>Provider</servlet-name>
-        <servlet-class>ctrl.provider.Provider</servlet-class>
+        <servlet-class>ctrl.provider.Add</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>Provider</servlet-name>
@@ -61,5 +61,33 @@
         <servlet-name>Logout</servlet-name>
         <url-pattern>/logout</url-pattern>
     </servlet-mapping>
+
+    <servlet>
+        <servlet-name>BillingAdd</servlet-name>
+        <servlet-class>ctrl.billing.Add</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>BillingAdd</servlet-name>
+        <url-pattern>/billing</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>BillingModify</servlet-name>
+        <servlet-class>ctrl.billing.Modify</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>BillingModify</servlet-name>
+        <url-pattern>/billing_modify</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>BillingDelete</servlet-name>
+        <servlet-class>ctrl.billing.Delete</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>BillingDelete</servlet-name>
+        <url-pattern>/billing_delete</url-pattern>
+    </servlet-mapping>
+
 
 </web-app>

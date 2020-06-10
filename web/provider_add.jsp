@@ -8,7 +8,7 @@
 <body>
 <div class="main">
     <div class="optitle clearfix">
-        <div class="title">供应商管理&gt;&gt;</div>
+        <div class="title">供应商添加&gt;&gt;</div>
     </div>
     <form method="post" action="provider">
         <div class="content">

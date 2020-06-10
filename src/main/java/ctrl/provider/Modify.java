@@ -13,6 +13,9 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.Date;
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 public class Modify extends HttpServlet {
     /**
@@ -68,9 +71,14 @@ public class Modify extends HttpServlet {
                     .creator(creator)
                     .create_time(time)
                     .build();
-            System.out.println(p);
             providerDao.updateProvider(p);
-            req.getSession().setAttribute("providers", providerDao.getAllproviders());
+
+            List<Provider> providerList = providerDao.getAllproviders();
+            Map<Integer, String> providerMap =
+                    providerList.stream().collect(Collectors.toMap(Provider::getId, Provider::getName));
+
+            session.setAttribute("providers", providerList);
+            session.setAttribute("providersMap", providerMap);
             resp.sendRedirect("provider_list.jsp");
         } catch (SQLException | ClassNotFoundException e) {
             e.printStackTrace();
