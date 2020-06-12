@@ -1,4 +1,4 @@
-﻿<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -16,21 +16,6 @@
     </script>
 </head>
 <body>
-
-<div class="menu">
-    <table>
-        <tbody>
-        <tr>
-            <td>
-                <form method="get" action="user_search">
-                    用户名称：<input name="name" class="input-text" type="text">&nbsp;&nbsp;&nbsp;&nbsp;
-                    <input value="查 询" type="submit" class="button">
-                </form>
-            </td>
-        </tr>
-        </tbody>
-    </table>
-</div>
 
 <div class="main">
     <div class="optitle clearfix">
@@ -63,23 +48,22 @@
                 <td>操作</td>
             </tr>
 
-            <c:forEach items="${sessionScope.users}" var="u">
-                <tr>
-                    <td height="23"><span class="STYLE1">${u.id}</span></td>
-                    <td><span class="STYLE1"><a href="#" onclick="doit('mod',1)">${u.username}</a></span></td>
-                    <td><span class="STYLE1">${u.birthday}</span></td>
-                    <td><span class="STYLE1">${u.phone}</span></td>
-                    <td><span class="STYLE1">${u.address}</span></td>
-                    <td><span class="STYLE1">
-                        <c:if test="${u.role == 0}">经理</c:if>
-                        <c:if test="${u.role == 1}">普通用户</c:if>
+            <tr>
+                <td height="23"><span class="STYLE1">${requestScope.user.id}</span></td>
+                <td><span class="STYLE1"><a href="#" onclick="doit('mod',1)">${requestScope.user.username}</a></span>
+                </td>
+                <td><span class="STYLE1">${requestScope.user.birthday}</span></td>
+                <td><span class="STYLE1">${requestScope.user.phone}</span></td>
+                <td><span class="STYLE1">${requestScope.user.address}</span></td>
+                <td><span class="STYLE1">
+                        <c:if test="${requestScope.user.role == 0}">经理</c:if>
+                        <c:if test="${requestScope.user.role == 1}">普通用户</c:if>
                     </span></td>
-                    <td width="100">
-                        <div class="STYLE1"><a href="user_modify?id=${u.id}">修改</a></div>
-                        <span class="STYLE1"><a href="user_delete?id=${u.id}">删除</a></span>
-                    </td>
-                </tr>
-            </c:forEach>
+                <td width="100">
+                    <div class="STYLE1"><a href="user_modify?id=${requestScope.user.id}">修改</a></div>
+                    <span class="STYLE1"><a href="user_delete?id=${requestScope.user.id}">删除</a></span>
+                </td>
+            </tr>
 
             </tbody>
         </table>

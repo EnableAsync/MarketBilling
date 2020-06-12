@@ -1,8 +1,11 @@
-package ctrl.billing;
+package ctrl.provider;
 
-import dao.BillDao;
-import dao.impl.BillDaoImpl;
-import entity.Bill;
+import dao.ProviderDao;
+import dao.UserDao;
+import dao.impl.ProviderDaoImpl;
+import dao.impl.UserDaoImpl;
+import entity.Provider;
+import entity.User;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -26,18 +29,17 @@ public class Search extends HttpServlet {
             return;
         }
 
-        BillDao billDao = new BillDaoImpl();
+        ProviderDao providerDao = new ProviderDaoImpl();
         try {
-            List<Bill> bills = billDao.getBillsByNameAndPayment(
+            List<Provider> providers = providerDao.getProvidersByNameAndDesc(
                     req.getParameter("name"),
-                    Short.parseShort(req.getParameter("isPay"))
+                    req.getParameter("desc")
             );
+            req.setAttribute("providers", providers);
 
-            req.setAttribute("bills", bills);
-            req.getRequestDispatcher("bill_result.jsp").forward(req, resp);
+            req.getRequestDispatcher("provider_result.jsp").forward(req, resp);
         } catch (SQLException | ClassNotFoundException e) {
             e.printStackTrace();
         }
-
     }
 }

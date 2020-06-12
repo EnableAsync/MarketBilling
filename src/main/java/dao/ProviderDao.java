@@ -15,4 +15,6 @@ public interface ProviderDao {
     public int addProvider(Provider provider) throws SQLException, ClassNotFoundException;
 
     public Provider getProviderById(int id) throws SQLException, ClassNotFoundException;
+
+    public List<Provider> getProvidersByNameAndDesc(String name, String desc) throws SQLException, ClassNotFoundException;
 }

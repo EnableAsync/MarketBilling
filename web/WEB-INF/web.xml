@@ -3,9 +3,9 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
          version="4.0">
-    <!--    <welcome-file-list>-->
-    <!--        <welcome-file>login.jsp</welcome-file>-->
-    <!--    </welcome-file-list>-->
+        <welcome-file-list>
+            <welcome-file>login.jsp</welcome-file>
+        </welcome-file-list>
 
 <!--    Login-->
 
@@ -27,7 +27,7 @@
     <servlet-mapping>
         <servlet-name>Admin</servlet-name>
         <url-pattern>/admin</url-pattern>
-        <url-pattern>/</url-pattern>
+<!--        <url-pattern>/</url-pattern>-->
     </servlet-mapping>
 
 <!--    Provider-->
@@ -57,6 +57,15 @@
     <servlet-mapping>
         <servlet-name>ProviderDelete</servlet-name>
         <url-pattern>/provider_delete</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>ProviderSearch</servlet-name>
+        <servlet-class>ctrl.provider.Search</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ProviderSearch</servlet-name>
+        <url-pattern>/provider_search</url-pattern>
     </servlet-mapping>
 
 <!--    Logout-->
@@ -99,6 +108,15 @@
         <url-pattern>/billing_delete</url-pattern>
     </servlet-mapping>
 
+    <servlet>
+        <servlet-name>BillingSearch</servlet-name>
+        <servlet-class>ctrl.billing.Search</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>BillingSearch</servlet-name>
+        <url-pattern>/billing_search</url-pattern>
+    </servlet-mapping>
+
 <!--    User-->
 
     <servlet>
@@ -126,6 +144,15 @@
     <servlet-mapping>
         <servlet-name>UserDelete</servlet-name>
         <url-pattern>/user_delete</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>UserSearch</servlet-name>
+        <servlet-class>ctrl.user.Search</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>UserSearch</servlet-name>
+        <url-pattern>/user_search</url-pattern>
     </servlet-mapping>
 
 </web-app>

@@ -109,4 +109,31 @@ public class BillDaoImpl extends BaseDao implements BillDao {
                 .create_time(rs.getDate("create_time"))
                 .build();
     }
+
+    @Override
+    public List<Bill> getBillsByNameAndPayment(String name, short payment) throws SQLException, ClassNotFoundException {
+        Connection conn = getConn();
+        String sql = "select * from market_billing.bills where product_name = ? and is_payment = ?";
+        PreparedStatement ps = conn.prepareStatement(sql);
+        ps.setString(1, name);
+        ps.setShort(2, payment);
+        ResultSet rs = ps.executeQuery();
+        List<Bill> billList = new ArrayList<>();
+
+        while (rs.next()) {
+            Bill bill = Bill.builder()
+                    .id(rs.getInt("id"))
+                    .product_name(rs.getString("product_name"))
+                    .product_desc(rs.getString("product_desc"))
+                    .product_count(rs.getInt("product_count"))
+                    .total_price(rs.getBigDecimal("total_price"))
+                    .is_payment(rs.getShort("is_payment"))
+                    .provider_id(rs.getInt("provider_id"))
+                    .creator(rs.getString("creator"))
+                    .create_time(rs.getDate("create_time"))
+                    .build();
+            billList.add(bill);
+        }
+        return billList;
+    }
 }

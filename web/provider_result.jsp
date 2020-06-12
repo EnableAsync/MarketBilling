@@ -1,4 +1,4 @@
-﻿<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -16,22 +16,6 @@
     </script>
 </head>
 <body>
-
-<div class="menu">
-    <table>
-        <tbody>
-        <tr>
-            <td>
-                <form method="get" action="provider_search">
-                    供应商名称：<input name="name" class="input-text" type="text">
-                    &nbsp;&nbsp;&nbsp;&nbsp;供应商描述：<input name="desc" class="input-text" type="text">&nbsp;&nbsp;&nbsp;&nbsp;
-                    <input value="组合查询" type="submit" class="button">
-                </form>
-            </td>
-        </tr>
-        </tbody>
-    </table>
-</div>
 
 <div class="main">
     <div class="optitle clearfix">
@@ -66,7 +50,7 @@
                     <div class="STYLE1" align="center">操作</div>
                 </td>
             </tr>
-            <c:forEach items="${sessionScope.providers}" var="provider">
+            <c:forEach items="${requestScope.providers}" var="provider">
                 <tr>
                     <td width="70" height="29">
                         <div class="STYLE1" align="center">${provider.id}</div>

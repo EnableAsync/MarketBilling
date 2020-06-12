@@ -1,8 +1,8 @@
 <%--
   Created by IntelliJ IDEA.
   User: SJJ
-  Date: 2020/6/5
-  Time: 20:30
+  Date: 2020/6/12
+  Time: 17:27
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
@@ -14,16 +14,6 @@
     <link type="text/css" rel="stylesheet" href="css/style.css"/>
 </head>
 <body>
-<div class="menu">
-    <form method="get" action="billing_search">
-        商品名称：<input type="text" name="name" class="input-text" />&nbsp;&nbsp;&nbsp;&nbsp;
-        是否付款：<select name="isPay">
-        <option value="1">已付款</option>
-        <option value="0">未付款</option>
-    </select>&nbsp;&nbsp;&nbsp;&nbsp;
-        <input type="submit" name="submit" value="组合查询" class="button" />
-    </form>
-</div>
 <div class="main">
     <div class="optitle clearfix">
         <em><input type="button" name="button" value="添加数据" class="input-button"
@@ -43,7 +33,7 @@
                 <td>账单时间</td>
                 <td>操作</td>
             </tr>
-            <c:forEach items="${sessionScope.bills}" var="bill">
+            <c:forEach items="${requestScope.bills}" var="bill">
                 <tr>
                     <td>${bill.id}</td>
                     <td>${bill.product_name}</td>
@@ -69,3 +59,4 @@
 </div>
 </body>
 </html>
+

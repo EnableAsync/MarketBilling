@@ -16,4 +16,6 @@ public interface BillDao {
     public int addBill(Bill bill) throws SQLException, ClassNotFoundException;
 
     public Bill getBillById(int id) throws SQLException, ClassNotFoundException;
+
+    public List<Bill> getBillsByNameAndPayment(String name, short payment) throws SQLException, ClassNotFoundException;
 }

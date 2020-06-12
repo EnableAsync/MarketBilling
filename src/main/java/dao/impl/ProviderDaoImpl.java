@@ -110,4 +110,29 @@ public class ProviderDaoImpl extends BaseDao implements ProviderDao {
         }
         return provider;
     }
+
+    @Override
+    public List<Provider> getProvidersByNameAndDesc(String name, String desc) throws SQLException, ClassNotFoundException {
+        Connection conn = getConn();
+        String sql = "select * from market_billing.providers where name = ? and `desc` = ?";
+        PreparedStatement ps = conn.prepareStatement(sql);
+        ps.setString(1, name);
+        ps.setString(2, desc);
+        ResultSet rs = ps.executeQuery();
+        List<Provider> providerList = new ArrayList<>();
+
+        while (rs.next()) {
+            Provider provider = Provider.builder()
+                    .id(rs.getInt("id"))
+                    .name(rs.getString("name"))
+                    .desc(rs.getString("desc"))
+                    .tel(rs.getString("tel"))
+                    .address(rs.getString("address"))
+                    .creator(rs.getString("creator"))
+                    .create_time(rs.getDate("create_time"))
+                    .build();
+            providerList.add(provider);
+        }
+        return providerList;
+    }
 }

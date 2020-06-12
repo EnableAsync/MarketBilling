@@ -1,8 +1,8 @@
-package ctrl.billing;
+package ctrl.user;
 
-import dao.BillDao;
-import dao.impl.BillDaoImpl;
-import entity.Bill;
+import dao.UserDao;
+import dao.impl.UserDaoImpl;
+import entity.User;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -11,7 +11,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.sql.SQLException;
-import java.util.List;
 
 public class Search extends HttpServlet {
     @Override
@@ -26,18 +25,14 @@ public class Search extends HttpServlet {
             return;
         }
 
-        BillDao billDao = new BillDaoImpl();
+        UserDao userDao = new UserDaoImpl();
         try {
-            List<Bill> bills = billDao.getBillsByNameAndPayment(
-                    req.getParameter("name"),
-                    Short.parseShort(req.getParameter("isPay"))
-            );
+            User user = userDao.getUserByName(req.getParameter("name"));
+            req.setAttribute("user", user);
 
-            req.setAttribute("bills", bills);
-            req.getRequestDispatcher("bill_result.jsp").forward(req, resp);
+            req.getRequestDispatcher("user_result.jsp").forward(req, resp);
         } catch (SQLException | ClassNotFoundException e) {
             e.printStackTrace();
         }
-
     }
 }
