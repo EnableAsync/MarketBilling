@@ -5,3 +5,7 @@
 一个用 Servlet 和 JSP 完成的一个 web 应用
 
 使用 Maven 进行构建
+
+![screenshot](./screenshot/screenshot.png)
+
+
