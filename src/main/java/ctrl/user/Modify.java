@@ -1,8 +1,7 @@
-package ctrl.provider;
+package ctrl.user;
 
-import dao.ProviderDao;
-import dao.impl.ProviderDaoImpl;
-import entity.Provider;
+import dao.UserDao;
+import dao.impl.UserDaoImpl;
 import entity.User;
 
 import javax.servlet.ServletException;
@@ -12,14 +11,15 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.List;
-import java.util.Map;
-import java.util.stream.Collectors;
 
 public class Modify extends HttpServlet {
+    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+
     /**
-     * 根据 Id 获取 Provider 信息
+     * 根据 Id 获取 User 信息
      */
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -34,21 +34,22 @@ public class Modify extends HttpServlet {
         }
 
         int id = Integer.parseInt(req.getParameter("id"));
-        ProviderDao providerDao = new ProviderDaoImpl();
+        UserDao userDao = new UserDaoImpl();
         try {
-            Provider p = providerDao.getProviderById(id);
-            if (p == null) {
+            User user = userDao.getUserById(id);
+            if (user == null) {
                 return;
             }
-            req.setAttribute("provider", p);
-            req.getRequestDispatcher("provider_modify.jsp").forward(req, resp);
+
+            req.setAttribute("user", user);
+            req.getRequestDispatcher("user_modify.jsp").forward(req, resp);
         } catch (SQLException | ClassNotFoundException e) {
             e.printStackTrace();
         }
     }
 
     /**
-     * 修改 Provider 信息
+     * 修改 User 信息
      */
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -63,33 +64,34 @@ public class Modify extends HttpServlet {
         }
 
         int id = Integer.parseInt(req.getParameter("id"));
-        String name = req.getParameter("name");
-        String desc = req.getParameter("desc");
-        String tel = req.getParameter("tel");
+        String username = req.getParameter("username");
+        String phone = req.getParameter("phone");
         String address = req.getParameter("address");
-        String creator = ((User) req.getSession().getAttribute("user")).getUsername();
-        Date time = new Date();
-
-        ProviderDao providerDao = new ProviderDaoImpl();
+        short role = Short.parseShort(req.getParameter("role"));
+        Date birthday = null;
         try {
-            Provider p = entity.Provider.builder()
+            birthday = sdf.parse(req.getParameter("birthday"));
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        UserDao userDao = new UserDaoImpl();
+        try {
+            User u = User.builder()
                     .id(id)
-                    .name(name)
-                    .desc(desc)
-                    .tel(tel)
+                    .username(username)
+                    .phone(phone)
                     .address(address)
-                    .creator(creator)
-                    .create_time(time)
+                    .birthday(birthday)
+                    .role(role)
                     .build();
-            providerDao.updateProvider(p);
+            System.out.println(u);
+            userDao.updateUser(
+                    u
+            );
 
-            List<Provider> providerList = providerDao.getAllproviders();
-            Map<Integer, String> providerMap =
-                    providerList.stream().collect(Collectors.toMap(Provider::getId, Provider::getName));
-
-            session.setAttribute("providers", providerList);
-            session.setAttribute("providersMap", providerMap);
-            resp.sendRedirect("provider_list.jsp");
+            session.setAttribute("users", userDao.getAllUsers());
+            resp.sendRedirect("user_list.jsp");
         } catch (SQLException | ClassNotFoundException e) {
             e.printStackTrace();
         }

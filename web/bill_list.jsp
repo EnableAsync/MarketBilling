@@ -59,7 +59,7 @@
                     <td>${sessionScope.providersMap[bill.provider_id]}</td>
                     <td>${bill.product_desc}</td>
                     <td>${bill.create_time}</td>
-                    <td>
+                    <td width="100">
                         <div class="STYLE1"><a href="billing_modify?id=${bill.id}">修改</a></div>
                         <span class="STYLE1"><a href="billing_delete?id=${bill.id}">删除</a></span>
                     </td>

@@ -64,7 +64,6 @@
             </table>
         </div>
         <div class="buttons">
-            <input type="hidden" name="method" value="put"/>
             <input type="submit" name="submit" value="确认" class="input-button"/>
             <input type="button" name="button" value="返回" class="input-button" onclick="history.back();"/>
         </div>

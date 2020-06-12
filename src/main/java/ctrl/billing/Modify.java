@@ -23,6 +23,9 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 public class Modify extends HttpServlet {
+    /**
+     * 修改 Bill
+     */
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         req.setCharacterEncoding("utf-8");
         resp.setContentType("text/html; charset=utf-8");
@@ -70,6 +73,16 @@ public class Modify extends HttpServlet {
      * 根据 Id 获取 Bill
      */
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        req.setCharacterEncoding("utf-8");
+        resp.setContentType("text/html; charset=utf-8");
+
+        HttpSession session = req.getSession();
+        Object o = session.getAttribute("user");
+        if (o == null) {
+            resp.sendRedirect("login.jsp");
+            return;
+        }
+
         int id = Integer.parseInt(req.getParameter("id"));
         BillDao billDao = new BillDaoImpl();
         try {

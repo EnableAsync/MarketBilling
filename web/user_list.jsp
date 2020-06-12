@@ -8,9 +8,9 @@
     <link type="text/css" rel="stylesheet" href="css/style.css">
     <script type="text/javascript">
         function doit(flag, id) {
-            if (flag == "del") {
-                if (confirm("确认删除吗？") != true)
-                    return;
+            if (flag === "del") {
+                if (confirm("确认删除吗？") !== true)
+                    return false;
             }
         }
     </script>
@@ -37,7 +37,7 @@
 <div class="main">
 
     <div class="optitle clearfix">
-        <%--        <em><input value="添加数据" class="input-button" onclick="window.location='userAdd.html'" type="button"></em>--%>
+        <em><input value="添加数据" class="input-button" onclick="window.location='user_add.jsp'" type="button"></em>
         <div class="title">用户管理&gt;&gt;</div>
     </div>
     <div class="content">
@@ -63,6 +63,7 @@
                 <td width="150">
                     <div class="STYLE1" align="center">权限</div>
                 </td>
+                <td>操作</td>
             </tr>
 
             <c:forEach items="${sessionScope.users}" var="u">
@@ -72,7 +73,14 @@
                     <td><span class="STYLE1">${u.birthday}</span></td>
                     <td><span class="STYLE1">${u.phone}</span></td>
                     <td><span class="STYLE1">${u.address}</span></td>
-                    <td><span class="STYLE1">${u.role}</span></td>
+                    <td><span class="STYLE1">
+                        <c:if test="${u.role == 0}">经理</c:if>
+                        <c:if test="${u.role == 1}">普通用户</c:if>
+                    </span></td>
+                    <td width="100">
+                        <div class="STYLE1"><a href="user_modify?id=${u.id}">修改</a></div>
+                        <span class="STYLE1"><a href="user_delete?id=${u.id}">删除</a></span>
+                    </td>
                 </tr>
             </c:forEach>
 
